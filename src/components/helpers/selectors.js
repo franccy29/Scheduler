@@ -16,3 +16,16 @@ export function getInterview (state, interview) {
   }
   return null;
 }
+
+
+export function getInterviewersForDay (state, day) {
+  const finalArray = [];
+  state.days.forEach((select) => {
+    if (select.name === day) {
+      select.interviewers.forEach(((num) => {
+        finalArray.push(state.interviewers[num])
+      }))
+    }
+  })
+  return finalArray;
+}
