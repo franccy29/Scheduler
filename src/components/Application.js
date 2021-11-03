@@ -8,7 +8,8 @@ import useApplicationData from '../hooks/useApplicationData';
 
 
 
-
+// main part, creates an array of every appointment and add a last one with the kay "last" so the CSS can hide it and end the day at 5pm
+// render the dayList too using the data coming from useApplicationData wich calls the API and creates every hooks(../hooks/useApplicationData)
 
 export default function Application() {
   const {

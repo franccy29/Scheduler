@@ -11,6 +11,7 @@ import useVisualMode from "../../hooks/useVisualMode";
 
 
 export default function Appointment (props) {
+  // create every mode posssible
   const EMPTY = "EMPTY";
   const SHOW = "SHOW";
   const CREATE = "CREATE";
@@ -20,8 +21,12 @@ export default function Appointment (props) {
   const EDIT = "EDIT";
   const ERROR_DELETE = "ERROR_DELETE";
   const ERROR_SAVE = "ERROR_SAVE";
+
+  // add the visual mode "manager"
   const { mode, transition, back } = useVisualMode( props.interview ? SHOW : EMPTY );
 
+  // save the new appointment using the bookInterview function coming from Application.js 
+  // passed by props and from (../../hooks/useApplicationData)à
   function save(name, interviewer) {
     const interview = {
       student: name,
@@ -37,10 +42,14 @@ export default function Appointment (props) {
         transition(ERROR_SAVE, true)
       })
   }
+
+  // change mode to confirm, used in the onCancel from the SHOW mode
   function confirming () {
     transition(CONFIRM);
   }
 
+  // delete the appointment using the cancelInterview function coming from Application.js 
+  // passed by props and from (../../hooks/useApplicationData)
   function cancel(){
     transition(DELETING);
     props.cancelInterview(props.id)
@@ -51,11 +60,12 @@ export default function Appointment (props) {
         transition(ERROR_DELETE, true)
       })
   }
-
+// change mode to edit, used in the SHOW mode
   function editing () {
     transition(EDIT);
   }
 
+  // render the good mode based on the value of MODE
   return (
     <article className="appointment">
       <Header time={props.time} />

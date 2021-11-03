@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import InterviewerListItem from 'components/InterviewerListItem';
 import "components/InterviewerList.scss";
 
+//  makes an array of every interviewers received and render them all
 export default function InterviewerList (props) {
   const interviewerArray = [];
   props.interviewers.map((unique) => {
@@ -21,7 +22,7 @@ export default function InterviewerList (props) {
     </section>
   );
 }
-
+// asure that the props.interviewers is an array
 InterviewerList.propTypes = {
   interviewers: PropTypes.array.isRequired
 };

@@ -1,6 +1,7 @@
 import React from 'react';
 import DayListItem from 'components/DayListItem';
 
+// creates an array of every day thats comes from props.days and render them
 export default function DayList(props) {
   const dayArray = []
   props.days.map((uniqueDay) => {
@@ -11,7 +12,8 @@ export default function DayList(props) {
       name={uniqueDay.name} 
       spots={uniqueDay.spots} 
       selected={uniqueDay.name === props.value} 
-      setDay={props.onChange} />)
+      setDay={props.onChange}
+      />)
   );
 });
   return (
