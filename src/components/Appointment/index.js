@@ -26,7 +26,7 @@ export default function Appointment (props) {
   const { mode, transition, back } = useVisualMode( props.interview ? SHOW : EMPTY );
 
   // save the new appointment using the bookInterview function coming from Application.js 
-  // passed by props and from (../../hooks/useApplicationData)à
+  // passed by props and from (../../hooks/useApplicationData)
   function save(name, interviewer) {
     const interview = {
       student: name,
@@ -34,12 +34,11 @@ export default function Appointment (props) {
     };
     transition(SAVING);
     props.bookInterview(props.id, interview)
-      .then(() => {
-        console.log("changing to SHOW")
-        transition(SHOW);
-      })
-      .catch(() => {
-        transition(ERROR_SAVE, true)
+    .then(() => {
+      transition(SHOW);
+    })
+    .catch((error) => {
+        transition(ERROR_SAVE, true);
       })
   }
 

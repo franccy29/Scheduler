@@ -18,12 +18,17 @@ export default function Form (props) {
   }
   
   function validate() {
+    console.log(interviewer)
     if (student === "") {
       setError("Student name cannot be blank");
       return;
+    } else if (!interviewer) {
+      setError("You have to choose an interviewer");
+      return;
+    } else {
+      setError("");
+      props.onSave(student, interviewer);
     }
-    setError("");
-    props.onSave(student, interviewer);
   }
   
   return (
