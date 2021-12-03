@@ -30,7 +30,8 @@ export default function useApplicationData () {
   }, [state.day])
     
   // create a new interview, first it send the put request to the API then when it's over we setState and adjust the spots remaining
-  function bookInterview (id, interview) {
+  function bookInterview (id, interview, changeSpot) {
+    console.log(changeSpot)
     const appointment = {
       ...state.appointments[id],
       interview: { ...interview }
@@ -41,9 +42,12 @@ export default function useApplicationData () {
     };
 
     return axios.put(`/api/appointments/${id}`, {interview})
-    .then(() =>{
-      const days = updateSpots(id, state, true);
-      setState({...state, days, appointments})
+    .then(() =>{ 
+      if (!changeSpot) {
+        const days = updateSpots(id, state, true);
+        setState({...state, days, appointments})
+      }
+      setState({...state, appointments})
     })
   }
 

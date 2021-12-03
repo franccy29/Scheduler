@@ -16,13 +16,18 @@ export default function useVisualMode (initial) {
   }
   
   // goes back to the last mode based on the history
-  function back () {
+  function back (twice) {
     if (history.length > 1) {
       history.pop();
       setMode(history[history.length - 1]);
       setHistory(history);
 
     } 
+    if (twice && history.length > 1) {
+      history.pop();
+      setMode(history[history.length - 1]);
+      setHistory(history);
+    }
   }
 
   return {mode, transition, back};

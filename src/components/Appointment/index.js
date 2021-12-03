@@ -27,13 +27,13 @@ export default function Appointment (props) {
 
   // save the new appointment using the bookInterview function coming from Application.js 
   // passed by props and from (../../hooks/useApplicationData)
-  function save(name, interviewer) {
+  function save(name, interviewer, changeSpot) {
     const interview = {
       student: name,
       interviewer
     };
     transition(SAVING);
-    props.bookInterview(props.id, interview)
+    props.bookInterview(props.id, interview, changeSpot)
     .then(() => {
       transition(SHOW);
     })
@@ -75,9 +75,9 @@ export default function Appointment (props) {
       {mode === SAVING && <Status message={"Saving"} />}
       {mode === DELETING && <Status message={"Deleting"} />}
       {mode === CONFIRM && <Confirm message={"Are you sure you would like to delete?"} onCancel={back} onConfirm={cancel} />}
-      {mode === EDIT &&  <Form interviewers={props.interviewers} interviewer={props.interview.interviewer.id} student={props.interview.student} onCancel={back} onSave={save} />}
+      {mode === EDIT &&  <Form interviewers={props.interviewers} interviewer={props.interview.interviewer.id} student={props.interview.student} onCancel={back} onSave={save} edit={true} />}
       {mode === ERROR_SAVE && <Error onClose={back} message={"There was an error while saving"} />}
-      {mode === ERROR_DELETE && <Error onClose={back} message={"There was an error while deleting"} />}
+      {mode === ERROR_DELETE && <Error onClose={() => back(true)} message={"There was an error while deleting"} />}
       
     </article>
   );
